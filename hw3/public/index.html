@@ -1,0 +1,142 @@
+<!-- Author: Emma Jeppesen -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheesecake Order</title>
+
+    <!--Include jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!--Include the separate JavaScript files-->
+    <script src="javascripts/order.js"></script>
+    <script src="javascripts/dropdown.js"></script>
+
+
+    <!-- Link to the external CSS file-->
+    <link rel="stylesheet" href="stylesheets\style.css">
+
+</head>
+
+<body>
+
+    <h1> Cheesecake Order Form </h1>
+
+    <!--Beautiful Cheesecake mmmm (Fun fact: I don't like cheesecake)-->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Mondays_at_Il_Forno_-_Cheesecake_with_strawberry_sauce.jpg/1599px-Mondays_at_Il_Forno_-_Cheesecake_with_strawberry_sauce.jpg?20171018065901" alt="Cheesecake Slice" width="300" class="image">
+
+    <!--Evil table to make it ugly and more accurate to the picture given-->
+    <div id="divForOptions" class="box left">
+        <table> 
+            <tr>
+                <!--Table headers for Quantity and Topping-->
+                <td>
+
+                    <label id="qList" for="quantity"> Quantity </label>
+
+                </td>
+
+                <td>
+                    
+                    <label id="tList" for="topping"> Toppings </label>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td> 
+                    <!--Number of slices form-->
+                    <form id="quantityForm" action="#">
+                        
+                        <select id="quantity" name="quantity">
+            
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+            
+                        </select>
+                    </form>
+                </td> 
+                    
+                <td>
+                    <!--Toppings form-->
+                    <form id="toppingForm" action="#">
+
+                        <br>
+
+                        <label for="Plain">
+                            <input type="radio" id="Plain" name="topping" value="Plain">
+                            Plain
+                        </label>
+
+                        <br>
+
+                        <label for="Cherry">
+                            <input type="radio" id="Cherry" name="topping" value="Cherry">
+                            Cherry
+                        </label>
+
+                        <br>
+
+                        <label for="Chocolate">
+                            <input type="radio" id="Chocolate" name="topping" value="Chocolate">
+                            Chocolate
+                        </label>
+
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+      
+    <!--Extra notes section for other requests-->
+    <div id="notesSection" class="box right center">
+        <label for="TextBox">Notes:</label>
+
+        <br>
+    
+            <textarea id="notes" name="Notes"  rows="4" cols="50" class ="notes" style="width: auto;">Enter any special instructions here: </textarea>
+
+        <br>
+        
+        <button type="button" id = "orderButton">Order</button>
+
+    </div>
+
+    <!--Total orders section-->
+    <div class="bottom-box">
+
+        <!--Header with a selecter inside to check diff month sales-->
+        <h3> Total Orders for <select id="monthSelector">
+                <option value="Jan">Jan</option>
+                <option value="Feb">Feb</option>
+                <option value="Mar">Mar</option>
+                <option value="Apr">Apr</option>
+                <option value="May">May</option>
+                <option value="Jun">Jun</option>
+                <option value="Jul">Jul</option>
+                <option value="Aug">Aug</option>
+                <option value="Sep">Sep</option>
+                <option value="Oct">Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec">Dec</option>
+            </select>
+        </h3>
+        
+
+        <ul>
+
+            <li id = "numCherry">11 Cherry</li>
+            <li id = "numChoc">17 Chocolate</li>
+            <li id = "numPlain">31 Plain</li>
+
+        </ul>
+
+    </div>
+
+</body>
+

@@ -1,0 +1,141 @@
+/* Author: Emma Jeppesen */
+
+/*Main body and font stylings*/
+body{
+	background-color: lightblue;
+}
+  
+h1{
+	color: rgb(135, 19, 19);
+	text-align: center;
+	font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+  
+h3{
+	font-family: verdana;
+	font-size: 20px;
+}
+
+/*Styling for the cheesecake images*/
+.image{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	width: 50%;
+
+	border: 1px solid #5d0505; 
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #6c0707;
+    box-shadow: 0 4px 8px rgba(84, 2, 2, 0.476);
+}
+
+/*Styling to put elements in the center*/
+.center{
+	display: block;
+	margin:auto;
+	margin-right: 20px;
+	text-align: center;
+	width: 50%;
+}
+
+/*Main background box styling*/
+.box {
+    border: 1px solid #d9f9fe; 
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #d9f9fe;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Left box styling*/
+.left {
+	float: left;
+	margin: 0 1.5%;
+	width: auto;
+	flex: 1;
+}
+
+/*Right box styling*/
+.right{
+	float: inherit;
+	margin: 0 1.5%;
+	margin-top: auto;
+	width: auto;
+	flex: 1;
+}
+
+/*Notes text area styling*/
+.notes{
+	background-color: rgba(250, 109, 109, 0.551);
+	text-decoration:rgb(173, 0, 158);
+}
+
+/*Bottom Box styling*/
+.bottom-box{
+	clear: both;
+    text-align: center;
+	position: relative;
+}
+
+.bottom-box ul{
+    list-style-type:circle;
+    list-style-position: inside;
+    margin: 0;
+    padding-left: 10px;
+}
+
+
+/*Dropdown styling*/
+#monthList{
+    display:none;
+    position:absolute;
+	top: 22%;
+	left: 58%;
+	transform: translateX(-50%);
+	margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ddd;
+    max-height: 100px;
+    overflow-y: scroll;
+    width: 120px;
+	max-height: 80px;
+}
+
+#monthList ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#monthList li{
+    padding: 8px;
+    cursor: pointer;
+	list-style:none;
+}
+
+#monthList li:hover{
+    background-color: #a4d7ee;
+}
+
+/*Make the Jan visually distinct to indicate a dropdown (The remnants of the days of work. Here for the memories. 
+I'll delete it if you want. But I spent so many hours on that!)*/
+#months{
+    color: rgb(78, 6, 6);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*Styling for the month selector*/
+#monthSelector{
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 4px;
+    border: 1px solid #ffbded;
+    background-color: #b7dbf8;
+    cursor: pointer;
+	font: verdana;
+	font-weight: bold;
+}
