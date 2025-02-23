@@ -1,4 +1,4 @@
-//Written by Emma Jeppesen
+//Author: Emma Jeppesen
 
 //dropdown.js
 $(function() {

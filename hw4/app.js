@@ -1,3 +1,5 @@
+//Edited by: Emma Jeppesen
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var ordersRouter = require('./routes/order');
 
 var app = express();
 
@@ -21,6 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/orders', ordersRouter);
+
+//Did 3001 because my computer was being mean and didn't want to run on 3000
+const PORT = 3001;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

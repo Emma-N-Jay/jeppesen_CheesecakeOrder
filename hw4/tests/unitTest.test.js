@@ -1,3 +1,5 @@
+//Author: Emma Jeppesen (But technically Martin Cenek)
+
 var fs = require('fs');
 const $ = require('jquery');
 
