@@ -31,8 +31,16 @@ router.post('/', (req, res) => {
             res.status(500).json({ error: "Failed to fetch order data" });
             return;
         }
+
+        //See if we catch any errors
+        console.log("Orders fetched:", JSON.stringify(results, null, 2));
+
         res.json(results);
     });
+
+     //See if we catch any errors
+     console.log("Orders fetched:", JSON.stringify(results, null, 2));
+
 });
 
 module.exports = router;
