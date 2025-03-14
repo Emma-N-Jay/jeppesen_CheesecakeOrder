@@ -29,7 +29,7 @@ app.use('/orders', ordersRouter);
 app.use('/neworder', newOrderRoutes);
 
 //Did 3001 because my computer was being mean and didn't want to run on 3000
-const PORT = 4000;
+const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
