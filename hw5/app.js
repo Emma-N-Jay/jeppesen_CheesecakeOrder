@@ -9,6 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ordersRouter = require('./routes/order');
+var newOrderRoutes = require('./routes/neworder');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/orders', ordersRouter);
+app.use('/neworder', newOrderRoutes);
 
 //Did 3001 because my computer was being mean and didn't want to run on 3000
 const PORT = 3001;
