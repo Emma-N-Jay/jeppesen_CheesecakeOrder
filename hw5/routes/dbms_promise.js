@@ -10,13 +10,20 @@
 exports.version = '0.0.1';
 
 
-var mysql = require('mysql'),
-    async = require('async');
+const mysql = require('mysql');
+const async = require('async');
 
     var host = "10.6.2.7";    //pdx0mysql00 IP address
     var database = "db_jeppesen27";  //database name
     var user = "cs341-02";         //username (change to match your db)
     var password = "Rjlo6QAZEewY-w[q";  //password (change to match your db, yes THIS IS VERY POOR PRACTICE)
+
+ // Check if the connection is created properly
+ if (!dbclient) {
+    console.error("Failed to create MySQL connection.");
+    reject(new Error("MySQL client not initialized"));
+    return;
+  }
 
 /**
  * dbquery
@@ -45,7 +52,7 @@ exports.dbquery = function(query_str) {
 
         //Step 1: Connect to the database
         function (callback) {
-            //console.log("\n** creating connection.");
+            console.log("\n** creating connection.");
             dbclient = mysql.createConnection({
                 host: host,
                 user: user,
@@ -58,13 +65,13 @@ exports.dbquery = function(query_str) {
 
         //Step 2: Issue query
         function (results, callback) {
-            //console.log("\n** retrieving data");
+            console.log("\n** retrieving data");
             dbclient.query(query_str, callback);
         },
 
         //Step 3: Collect results
         function (rows, fields, callback) {
-            //console.log("\n** dumping data:");
+            console.log("\n** dumping data:");
             results = rows;
             console.log("" + rows);
             callback(null);
