@@ -31,6 +31,16 @@ exports.dbquery = function(query_str) {
     var dbclient;
     var results = null;
 
+    dbclient.connect(function(err) {
+        if (err) {
+            console.log("Database connection failed:", err);
+            callback(err, null);
+        } else {
+            console.log("Successfully connected to the database!");
+            callback(null);
+        }
+    });
+
     async.waterfall([
 
         //Step 1: Connect to the database

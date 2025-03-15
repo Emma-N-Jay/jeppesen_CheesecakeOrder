@@ -38,7 +38,8 @@ router.post('/', async(req, res) => {
 
     try {
         // Get the topping ID
-        const toppingQuery = `SELECT t_id FROM toppings WHERE name = '${topping}'`;
+        const toppingQuery = `SELECT t_id FROM toppings WHERE LOWER(name) = LOWER('${topping}')`;
+        
         const results = await dbms.dbquery(toppingQuery);
         
         if (!results || results.length === 0) {
@@ -46,13 +47,17 @@ router.post('/', async(req, res) => {
         }
 
         const t_id = results[0].t_id;
+        console.log(`Found topping ID for '${topping}': ${t_id}`);
+
         const escapedNotes = mysql.escape(notes);
 
         // Values to insert
         const insertQuery = `
             INSERT INTO orders (t_id, quantity, notes, month, year) 
-            VALUES (${t_id}, ${quantity}, ${escapedNotes}, '${month}', ${year})
+            VALUES (${t_id}, ${quantity}, ${escapedNotes}, ${month}, ${year})
         `;
+
+        console.log("Executing Insert Query:", insertQuery);
         
         await dbms.dbquery(insertQuery);
 
