@@ -37,7 +37,7 @@ router.post('/', async(req, res) => {
     //dbms promise testing!
 
     try {
-        // Get the topping ID
+        //Get the topping ID
         const toppingQuery = `SELECT t_id FROM toppings WHERE LOWER(name) = LOWER('${topping}')`;
         
         const results = await dbms.dbquery(toppingQuery);
@@ -65,6 +65,7 @@ router.post('/', async(req, res) => {
 
     } catch (err) {
         console.error("Order insert error:", err);
+        console.error("Full Error: ", JSON.stringify(err, null, 2));
         return res.status(500).json({ error: "Failed to insert order" });
     }
 });
