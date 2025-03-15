@@ -22,8 +22,8 @@ function fetchOrdersForMonth(month) {
 
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error("AJAX error:", textStatus, errorThrown);
-        console.error("Response text:", jqXHR.responseText);
+        //console.error("AJAX error:", textStatus, errorThrown);
+        //console.error("Response text:", jqXHR.responseText);
         alert("Error: Could not fetch order data!");
     });
 }
@@ -94,8 +94,11 @@ let standardizedMonth = monthMap[selectedMonth] || selectedMonth;
 $(function() {
     $("#orderButton").click(eventHandler);
     $("#monthSelector").change(function() {
-
-        fetchOrdersForMonth(standardizedMonth);
+        
+        let selectedMonth = $(this).val();
+        //Debugging log
+        console.log("Selected month:", selectedMonth);
+        fetchOrdersForMonth(selectedMonth);
 
     });
 });
