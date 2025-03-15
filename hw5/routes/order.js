@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     //     GROUP BY orders.t_id    
     // `;
 
-    dbms.dbquery(query, [month], (err, results) => {
+    dbms.dbquery(query, (err, results) => {
         if (err) {
             console.error("Database error:", err);
             res.status(500).json({ error: "Failed to fetch order data" });
