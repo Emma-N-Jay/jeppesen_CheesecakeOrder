@@ -1,5 +1,34 @@
 //Author: Emma Jeppesen
 
+//Make a function to fetch the orders
+function fetchOrdersForMonth(month) {
+
+    //Debugging
+    console.log("Fetching orders for:", month);
+
+    $.post("/orders", { month: month }, function(data) {
+        console.log("Received JSON Order Data:", JSON.stringify(data, null, 2));
+
+        // Ensure data exists
+    if (!Array.isArray(data) || data.length === 0) {
+        console.warn("No order data received for month:", month);
+        return;
+    }
+
+        //Update the displayed order totals
+        $("#numCherry").text((data.find(t => t.topping === "Cherry")?.quantity || 0) + " Cherry");
+        $("#numChoc").text((data.find(t => t.topping === "Chocolate")?.quantity || 0) + " Chocolate");
+        $("#numPlain").text((data.find(t => t.topping === "Plain")?.quantity || 0) + " Plain");
+
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error("AJAX error:", textStatus, errorThrown);
+        console.error("Response text:", jqXHR.responseText);
+        alert("Error: Could not fetch order data!");
+    });
+}
+
+
 //order.js
 eventHandler = function(event) {
     event.preventDefault(); 
@@ -50,44 +79,17 @@ eventHandler = function(event) {
         });
     };
 
-        //Make a function to fetch the orders
-        function fetchOrdersForMonth(month) {
+};
 
-            //Debugging
-            console.log("Fetching orders for:", month);
-
-            $.post("/orders", { month: month }, function(data) {
-                console.log("Received JSON Order Data:", JSON.stringify(data, null, 2));
-        
-                // Ensure data exists
-            if (!Array.isArray(data) || data.length === 0) {
-                console.warn("No order data received for month:", month);
-                return;
-            }
-
-                //Update the displayed order totals
-                $("#numCherry").text((data.find(t => t.topping === "Cherry")?.quantity || 0) + " Cherry");
-                $("#numChoc").text((data.find(t => t.topping === "Chocolate")?.quantity || 0) + " Chocolate");
-                $("#numPlain").text((data.find(t => t.topping === "Plain")?.quantity || 0) + " Plain");
-        
-        
-            }).fail(function() {
-                console.error("AJAX error:", textStatus, errorThrown);
-                console.error("Response text:", jqXHR.responseText);
-                alert("Error: Could not fetch order data!");
-            });
-        }
-    };
-
-    //For month consistency
-    const monthMap = {
-        "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
-        "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
-        "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec"
-    };
+//For month consistency
+const monthMap = {
+    "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
+    "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
+    "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec"
+};
     
-    let selectedMonth = $("#monthSelector").val();
-    let standardizedMonth = monthMap[selectedMonth] || selectedMonth;
+let selectedMonth = $("#monthSelector").val();
+let standardizedMonth = monthMap[selectedMonth] || selectedMonth;
 
 $(function() {
     $("#orderButton").click(eventHandler);
