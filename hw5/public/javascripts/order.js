@@ -88,8 +88,8 @@ const monthMap = {
     "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec"
 };
     
-let selectedMonth = $("#monthSelector").val();
-let standardizedMonth = monthMap[selectedMonth] || selectedMonth;
+var selectedMonth = $("#monthSelector").val();
+var standardizedMonth = monthMap[selectedMonth] || selectedMonth;
 
 $(function() {
     $("#orderButton").click(eventHandler);
@@ -98,10 +98,9 @@ $(function() {
 
         //Debugging log
         console.log("Selected month before standardizing:", selectedMonth); 
-        console.log("Selected month are standardizing:", standardizedMonth);
-        //fetchOrdersForMonth(selectedMonth);
-
-        fetchOrdersForMonth(standardizedMonth);
+        console.log("Selected month after standardizing:", standardizedMonth);
+        
+        fetchOrdersForMonth(selectedMonth);
 
     });
 });
