@@ -10,10 +10,17 @@ router.post('/', (req, res) => {
     //get month
     const { month } = req.body;
 
+    if (!month) {
+        return res.status(400).json({ error: "Month parameter is missing" });
+    }
+
+    //For debugging
+    console.log("Fetching orders for month:", month);
+
     const query = `
         SELECT toppings.name AS topping, COALESCE(SUM(orders.quantity), 0) AS quantity
         FROM toppings
-        LEFT JOIN orders ON toppings.t_id = orders.t_id AND orders.month = ?
+        LEFT JOIN orders ON toppings.t_id = orders.t_id AND orders.month = '${month}'
         GROUP BY toppings.t_id
     `;
 
