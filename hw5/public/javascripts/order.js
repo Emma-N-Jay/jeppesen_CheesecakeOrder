@@ -9,10 +9,10 @@ function fetchOrdersForMonth(month) {
     $.post("/orders", { month: month }, function(data) {
         console.log("Received JSON Order Data:", JSON.stringify(data, null, 2));
 
-        // Ensure data exists
-    if (!Array.isArray(data) || data.length === 0) {
-        console.warn("No order data received for month:", month);
-        return;
+        //Ensure data exists
+        if (!Array.isArray(data) || data.length === 0) {
+            console.warn("No order data received for month:", month);
+            return;
     }
 
         //Update the displayed order totals
@@ -94,11 +94,14 @@ let standardizedMonth = monthMap[selectedMonth] || selectedMonth;
 $(function() {
     $("#orderButton").click(eventHandler);
     $("#monthSelector").change(function() {
-        
         let selectedMonth = $(this).val();
+
         //Debugging log
-        console.log("Selected month:", selectedMonth);
-        fetchOrdersForMonth(selectedMonth);
+        console.log("Selected month before standardizing:", selectedMonth); 
+        console.log("Selected month are standardizing:", standardizedMonth);
+        //fetchOrdersForMonth(selectedMonth);
+
+        fetchOrdersForMonth(standardizedMonth);
 
     });
 });
