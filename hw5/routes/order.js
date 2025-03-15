@@ -50,9 +50,6 @@ router.post('/', (req, res) => {
         res.json(results);
     });
 
-     //See if we catch any errors
-     console.log("Orders fetched:", JSON.stringify(results, null, 2));
-
 });
 
 module.exports = router;
