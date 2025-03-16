@@ -51,51 +51,72 @@ exports.dbquery = function(query_str) {
         }
     });
 
-    async.waterfall([
-
-        //Step 1: Connect to the database
-        function (callback) {
-            console.log("\n** creating connection.");
-            dbclient = mysql.createConnection({
-                host: host,
-                user: user,
-                password: password,
-                database: database,
-            });
-
-            dbclient.connect(callback);
-        },
-
-        //Step 2: Issue query
-        function (results, callback) {
-            console.log("\n** retrieving data");
-            dbclient.query(query_str, callback);
-        },
-
-        //Step 3: Collect results
-        function (rows, fields, callback) {
-            console.log("\n** dumping data:");
-            results = rows;
-            console.log("" + rows);
-            callback(null);
-        }
-
-    ],
-    // waterfall cleanup function
-    function (err, res) {
-        if (err) {
-            console.log("Database query failed.  sad");
-            console.log(err);
-            reject(new Error(err, null));
-        } else {
-            console.log("Database query completed.");
-            resolve(results);
-        }
-
-        //close connection to database
-        dbclient.end();
-
+    //EMMA TEST
+    //Connect to MySQL
+    dbclient.connect((err) => {
+      if (err) {
+        console.log("Database connection failed:", err);
+        return reject(new Error("Database connection failed"));
+      }
+      console.log("Successfully connected to the database!");
     });
+
+    // Execute query
+    dbclient.query(query_str, (err, results) => {
+      if (err) {
+        console.log("Database query failed:", err);
+        return reject(new Error("Query failed"));
+      }
+      console.log("Database query completed:", results);
+      resolve(results);  // Return results of the query
+    });
+
+    //ORIGINAL
+    // async.waterfall([
+
+    //     //Step 1: Connect to the database
+    //     function (callback) {
+    //         console.log("\n** creating connection.");
+    //         dbclient = mysql.createConnection({
+    //             host: host,
+    //             user: user,
+    //             password: password,
+    //             database: database,
+    //         });
+
+    //         dbclient.connect(callback);
+    //     },
+
+    //     //Step 2: Issue query
+    //     function (results, callback) {
+    //         console.log("\n** retrieving data");
+    //         dbclient.query(query_str, callback);
+    //     },
+
+    //     //Step 3: Collect results
+    //     function (rows, fields, callback) {
+    //         console.log("\n** dumping data:");
+    //         results = rows;
+    //         console.log("" + rows);
+    //         callback(null);
+    //     }
+
+    // ],
+    // // waterfall cleanup function
+    // function (err, res) {
+    //     if (err) {
+    //         console.log("Database query failed.  sad");
+    //         console.log(err);
+    //         reject(new Error(err, null));
+    //     } else {
+    //         console.log("Database query completed.");
+    //         resolve(results);
+    //     }
+
+    //     //close connection to database
+    //     dbclient.end();
+
+    // });
 
   });
 }//function dbquery
