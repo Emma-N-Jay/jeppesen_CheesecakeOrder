@@ -22,8 +22,6 @@ function fetchOrdersForMonth(month) {
 
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        //console.error("AJAX error:", textStatus, errorThrown);
-        //console.error("Response text:", jqXHR.responseText);
         alert("Error: Could not fetch order data!");
     });
 }
@@ -80,13 +78,6 @@ eventHandler = function(event) {
     };
 
 };
-
-//For month consistency
-const monthMap = {
-    "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
-    "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
-    "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec"
-};
     
 var selectedMonth = $("#monthSelector").val();
 var standardizedMonth = monthMap[selectedMonth] || selectedMonth;
@@ -98,7 +89,6 @@ $(function() {
 
         //Debugging log
         console.log("Selected month before standardizing:", selectedMonth); 
-        console.log("Selected month after standardizing:", standardizedMonth);
         
         fetchOrdersForMonth(selectedMonth);
 

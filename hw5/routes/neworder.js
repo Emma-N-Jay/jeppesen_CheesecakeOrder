@@ -20,7 +20,8 @@ router.post('/', async(req, res) => {
         return res.status(400).json({ error: "Topping and quantity are required" });
     }
 
-    //Make the months numbers for simplicity and db
+    //Make the months numbers for simplicity and db 
+    //(I forgot to add this elseware, so assuming this was sufficient, it caused me major grief)
     const monthMap = {
         "January": 1, "February": 2, "March": 3, "April": 4,
         "May": 5, "June": 6, "July": 7, "August": 8,
@@ -35,7 +36,6 @@ router.post('/', async(req, res) => {
     const year = currentYear;
 
     //dbms promise testing!
-
     try {
         //Get the topping ID
         const toppingQuery = `SELECT t_id FROM toppings WHERE LOWER(name) = LOWER('${topping}')`;
@@ -51,7 +51,7 @@ router.post('/', async(req, res) => {
 
         const escapedNotes = mysql.escape(notes);
 
-        // Values to insert
+        //Values to insert
         const insertQuery = `
             INSERT INTO orders (t_id, quantity, notes, month, year) 
             VALUES (${t_id}, ${quantity}, ${escapedNotes}, ${month}, ${year})
@@ -64,20 +64,20 @@ router.post('/', async(req, res) => {
         res.json({ success: true, message: "Order added successfully!" });
 
     } catch (err) {
+
         console.error("Order insert error:", err);
+
         console.error("Full Error: ", JSON.stringify(err, null, 2));
+
         return res.status(500).json({ error: "Failed to insert order" });
     }
 });
 
 
-
-
-
-
-
-
     //For the regular dbms
+    //I only changed to the promise because the dbms wasn't working the way I wanted. I'm sure
+    //If I kept trying I could have made this work. But alas, I gave up. 
+    //Please feel free to test if it would work by commenting out the above and switching the dbms to dbms.js
 
 //     const toppingQuery = `SELECT t_id FROM toppings WHERE name = '${topping}'`;
 

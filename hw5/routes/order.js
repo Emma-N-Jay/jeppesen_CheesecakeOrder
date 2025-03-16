@@ -13,23 +13,21 @@ const monthMap = {
     "Sep": "9", "Oct": "10", "Nov": "11", "Dec": "12"
 };
 
-
-
 //Retrieve order totals for selected month
 router.post('/', async(req, res) => {
 
     try {
-        // Get month
+        //Get month
         const { month } = req.body;
         const monthNumber = monthMap[month]; // Convert 'Mar' -> '03'
 
-        // Check if the month is provided
+        //Check if month is provided
         if (!monthNumber) {
             console.error("Invalid month input:", month);
             return res.status(400).json({ error: "Invalid month parameter" });
         }
 
-        // Debugging
+        //Debugging
         console.log("Fetching orders for month:", month);
 
         const query = `
@@ -39,16 +37,18 @@ router.post('/', async(req, res) => {
             GROUP BY toppings.t_id
         `;
 
-        // Use dbquery as a Promise and pass the parameter safely
         const results = await dbms.dbquery(query, [month]);
 
-        // Debugging: Log fetched data
+        //Debugging: Log fetched data
         console.log("Orders fetched:", JSON.stringify(results, null, 2));
 
         res.json(results);
+
     } catch (err) {
+
         console.error("Database error:", err);
         res.status(500).json({ error: "Failed to fetch order data" });
+
     }
 });
 

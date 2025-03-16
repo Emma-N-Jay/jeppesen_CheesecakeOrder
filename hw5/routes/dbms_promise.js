@@ -5,6 +5,7 @@
  * which contains the Cheesecake order data.
  *
  * Updated by: Stelios Papoutsakis & Spencer Rose
+ * Edited by Emma and Google. Sorry
  */
 
 exports.version = '0.0.1';
@@ -29,8 +30,8 @@ const async = require('async');
  */
 exports.dbquery = function(query_str) {
   return new Promise((resolve, reject) => {
-    // var dbclient;
-    // var results = null;
+    //var dbclient;
+    //var results = null;
 
     //Initialize MySQL connection
     console.log("Attempting to create MySQL connection...");
@@ -40,7 +41,6 @@ exports.dbquery = function(query_str) {
       password: password,
       database: database,
     });
-
 
     //EMMA TEST
     //Connect to MySQL
@@ -52,17 +52,20 @@ exports.dbquery = function(query_str) {
       console.log("Successfully connected to the database!");
     });
 
-    // Execute query
+    //query
     dbclient.query(query_str, (err, results) => {
       if (err) {
         console.log("Database query failed:", err);
         return reject(new Error("Query failed"));
       }
       console.log("Database query completed:", results);
-      resolve(results);  // Return results of the query
+      //Return results
+      resolve(results);  
     });
 
-    //ORIGINAL
+    //ORIGINAL (Gave me grief. I google and found this and work.)
+    //Basically all the callback things kept giving me problems. This is the only way
+    //I could get it to work. Sorry.
 
     // dbclient.connect(function(err) {
     //     if (err) {
@@ -120,4 +123,5 @@ exports.dbquery = function(query_str) {
     // });
 
   });
+
 }//function dbquery
