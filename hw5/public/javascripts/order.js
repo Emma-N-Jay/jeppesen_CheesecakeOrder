@@ -16,9 +16,9 @@ function fetchOrdersForMonth(month) {
     }
 
         //Update the displayed order totals
-        $("#numCherry").text((data.find(t => t.topping === "Cherry")?.quantity || 0) + " Cherry");
-        $("#numChoc").text((data.find(t => t.topping === "Chocolate")?.quantity || 0) + " Chocolate");
-        $("#numPlain").text((data.find(t => t.topping === "Plain")?.quantity || 0) + " Plain");
+        $("#numCherry").text((data.find(t => t.topping === "cherry")?.quantity || 0) + " Cherry");
+        $("#numChoc").text((data.find(t => t.topping === "chocolate")?.quantity || 0) + " Chocolate");
+        $("#numPlain").text((data.find(t => t.topping === "plain")?.quantity || 0) + " Plain");
 
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
