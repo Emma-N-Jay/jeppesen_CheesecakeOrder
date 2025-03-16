@@ -4,17 +4,29 @@ const express = require('express');
 const router = express.Router();
 const dbms = require("./dbms_promise")
 
+//I think this will fix all my problems.
+//As I have devolved into insanity, I believe I was asking for a date using month string, not int
+//I will make up for my crimes now
+const monthMap = {
+    "Jan": "01", "Feb": "2", "Mar": "3", "Apr": "4",
+    "May": "5", "Jun": "6", "Jul": "7", "Aug": "8",
+    "Sep": "9", "Oct": "10", "Nov": "11", "Dec": "12"
+};
+
+
+
 //Retrieve order totals for selected month
 router.post('/', async(req, res) => {
 
     try {
         // Get month
         const { month } = req.body;
+        const monthNumber = monthMap[month]; // Convert 'Mar' -> '03'
 
         // Check if the month is provided
-        if (!month) {
-            console.error("Error: Month parameter is missing");
-            return res.status(400).json({ error: "Month parameter is missing" });
+        if (!monthNumber) {
+            console.error("Invalid month input:", month);
+            return res.status(400).json({ error: "Invalid month parameter" });
         }
 
         // Debugging
@@ -23,7 +35,7 @@ router.post('/', async(req, res) => {
         const query = `
             SELECT toppings.name AS topping, COALESCE(SUM(orders.quantity), 0) AS quantity
             FROM toppings
-            LEFT JOIN orders ON toppings.t_id = orders.t_id AND orders.month = '${month}'
+            LEFT JOIN orders ON toppings.t_id = orders.t_id AND orders.month = '${monthNumber}'
             GROUP BY toppings.t_id
         `;
 
