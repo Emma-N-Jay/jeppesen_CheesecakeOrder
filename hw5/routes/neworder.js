@@ -28,11 +28,11 @@ router.post('/', async(req, res) => {
     };
     
     //Set a hardcoded month and year (For testing)
-    const month = monthMap["March"]; 
-    const year = 2025;
+    //const month = monthMap["March"]; 
+    //const year = 2025;
 
-    //const month = currentMonth;
-    //const year = currentYear;
+    const month = currentMonth;
+    const year = currentYear;
 
     //dbms promise testing!
 
