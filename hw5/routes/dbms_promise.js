@@ -18,12 +18,6 @@ const async = require('async');
     var user = "cs341-02";         //username (change to match your db)
     var password = "Rjlo6QAZEewY-w[q";  //password (change to match your db, yes THIS IS VERY POOR PRACTICE)
 
- // Check if the connection is created properly
- if (!dbclient) {
-    console.error("Failed to create MySQL connection.");
-    reject(new Error("MySQL client not initialized"));
-    return;
-  }
 
 /**
  * dbquery
@@ -35,8 +29,17 @@ const async = require('async');
  */
 exports.dbquery = function(query_str) {
   return new Promise((resolve, reject) => {
-    var dbclient;
-    var results = null;
+    // var dbclient;
+    // var results = null;
+
+    //Initialize MySQL connection
+    console.log("Attempting to create MySQL connection...");
+    var dbclient = mysql.createConnection({
+      host: host,
+      user: user,
+      password: password,
+      database: database,
+    });
 
     dbclient.connect(function(err) {
         if (err) {
